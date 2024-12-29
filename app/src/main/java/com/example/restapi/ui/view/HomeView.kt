@@ -161,16 +161,18 @@ fun MhsLayout(
     modifier: Modifier = Modifier,
     onDetailClick: (Mahasiswa) -> Unit,
     onDeleteClick: (Mahasiswa) -> Unit = {}
-){
-    LazyColumn (
-        modifier = modifier,
-        contentPadding = PaddingValues(16.dp),
+) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
-    ){
-        items(mahasiswa){kontak ->
+    ) {
+        items(mahasiswa) { kontak ->
             MhsCard(
                 mahasiswa = kontak,
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onDetailClick(kontak) },
                 onDeleteClick = {
@@ -180,6 +182,7 @@ fun MhsLayout(
         }
     }
 }
+
 
 @Composable
 fun MhsCard(
