@@ -6,10 +6,14 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.restapi.ui.view.DestinasiDetail
 import com.example.restapi.ui.view.DestinasiEntry
 import com.example.restapi.ui.view.DestinasiHome
+import com.example.restapi.ui.view.DetailView
 import com.example.restapi.ui.view.EntryMhsScreen
 import com.example.restapi.ui.view.HomeScreen
+
+
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()){
@@ -17,21 +21,32 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
         navController = navController,
         startDestination = DestinasiHome.route,
         modifier = Modifier,
-    ){
-        composable(DestinasiHome.route){
+    ) {
+        composable(DestinasiHome.route) {
             HomeScreen(
-                navigateToItemEntry = {navController.navigate(DestinasiEntry.route)},
+                navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
                 onDetailClick = {}
             )
         }
-        composable(DestinasiEntry.route){
+        composable(DestinasiEntry.route) {
             EntryMhsScreen(navigateBack = {
-                navController.navigate(DestinasiHome.route){
-                    popUpTo(DestinasiHome.route){
+                navController.navigate(DestinasiHome.route) {
+                    popUpTo(DestinasiHome.route) {
                         inclusive = true
                     }
                 }
             })
+        }
+        // Detail Screen
+        composable(
+            route = "${DestinasiDetail.route}/{nim}",
+        ) { backStackEntry ->
+            val nim = backStackEntry.arguments?.getString("nim") ?: ""
+            DetailView(
+                nim = nim,
+                onNavigateBack = { navController.popBackStack() }
+
+            )
         }
     }
 }
