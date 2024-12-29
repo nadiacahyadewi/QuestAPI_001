@@ -166,8 +166,8 @@ fun MhsLayout(
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp),
-        contentPadding = PaddingValues(vertical = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp) // Mengurangi jarak antar card
     ) {
         items(mahasiswa) { kontak ->
             MhsCard(
@@ -182,7 +182,6 @@ fun MhsLayout(
         }
     }
 }
-
 
 @Composable
 fun MhsCard(
