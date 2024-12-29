@@ -1,16 +1,8 @@
 package com.example.restapi.ui.view
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -18,7 +10,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,6 +36,7 @@ object DestinasiDetail : DestinasiNavigasi {
 fun DetailView(
     nim: String,
     onNavigateBack: () -> Unit,
+    onEditClick: () -> Unit,
     viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory),
     modifier: Modifier = Modifier
 ) {
@@ -67,11 +59,11 @@ fun DetailView(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = onNavigateBack,
+                onClick = onEditClick,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(18.dp)
             ) {
-                Icon(imageVector = Icons.Default.Edit, contentDescription = "Add Kontak")
+                Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Mahasiswa")
             }
         },
     ) { innerPadding ->
@@ -95,15 +87,13 @@ fun DetailView(
     }
 }
 
-
-
 @Composable
 fun DetailCard(mahasiswa: Mahasiswa) {
     Card(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth(),
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.medium
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -111,7 +101,7 @@ fun DetailCard(mahasiswa: Mahasiswa) {
         ) {
             Text(
                 text = "Nama: ${mahasiswa.nama}",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = "NIM: ${mahasiswa.nim}",
@@ -123,11 +113,11 @@ fun DetailCard(mahasiswa: Mahasiswa) {
             )
             Text(
                 text = "Alamat: ${mahasiswa.alamat}",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = "Angkatan: ${mahasiswa.angkatan}",
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.titleMedium
             )
         }
     }
